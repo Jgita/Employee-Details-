@@ -1,0 +1,37 @@
+<div class="container col-md-6 details">
+  <h2>Add Employee form</h2>
+  <form [formGroup]="EmployeeInfoForm" (ngSubmit)="addEmployee()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" formControlName="name" class="form-control" id="name" placeholder="Enter Employee Name" name="name">
+      <div class="form-control-feedback" *ngIf="EmployeeInfoForm.get('name').errors && (EmployeeInfoForm.get('name').dirty || EmployeeInfoForm.get('name').touched)">
+        <p class="invalid" *ngIf="EmployeeInfoForm.get('name').errors.required">Employee name is required.</p>
+        <p class="invalid" *ngIf="EmployeeInfoForm.get('name').errors.pattern">Invalid employee name. Only letters are allowed.</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="salary">Salary:</label>
+      <input type="text" formControlName="salary" class="form-control" id="salary" placeholder="Enter Employee Salary" name="salary">
+      <div class="form-control-feedback" *ngIf="EmployeeInfoForm.get('salary').errors && (EmployeeInfoForm.get('salary').touched || EmployeeInfoForm.get('salary').dirty)">
+        <p class="invalid" *ngIf="EmployeeInfoForm.get('salary').errors.required">Employee Salary is required.</p>
+        <p class="invalid" *ngIf="EmployeeInfoForm.get('salary').errors.pattern">Invalid employee salary. Only numbers are allowed.</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="age">Age:</label>
+      <input type="text" formControlName="age" class="form-control" id="age" placeholder="Enter Employee Age" name="age">
+      <div class="form-control-feedback" *ngIf="EmployeeInfoForm.get('age').errors && (EmployeeInfoForm.get('age').touched || EmployeeInfoForm.get('age').dirty)">
+        <p class="invalid" *ngIf="EmployeeInfoForm.get('age').errors.required">Employee age is required.</p>
+        <p class="invalid" *ngIf="EmployeeInfoForm.get('age').errors.min || EmployeeInfoForm.get('age').errors.max">Employee age must be 18 years old or above and upto 100 years old.</p>
+        <p class="invalid" *ngIf="EmployeeInfoForm.get('age').errors.pattern">Invalid employee age. Only numbers are allowed.</p>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!EmployeeInfoForm.valid">
+      Add Employee
+    </button>
+  </form>
+</div>
+
+<div class="my-container">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+</div>

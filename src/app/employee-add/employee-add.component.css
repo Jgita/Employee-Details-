@@ -1,0 +1,21 @@
+.invalid{
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+
+.details{
+	background-color: #fff;
+	padding:15px 30px;
+	position: relative;
+}
+.details:after {
+    content: '';
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 0;
+    height: 1px;
+    background: #dfe2e5;
+}

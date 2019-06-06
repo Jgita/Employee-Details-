@@ -1,0 +1,56 @@
+<div class="container">
+  <h2>Employee Details</h2>
+  <div class="">
+    <div class="row-eq-height mt-30 clearfix">
+      <div class="col-lg-6 col-md-6 dashboard-widget">
+        <button class="btn btn-primary" (click)="addEmployee()"> Add Employee</button>
+      </div>
+      <div class="col-lg-6 col-md-6 dashboard-widget">
+        <form>
+          <div class="form-group">
+            <div class="input-group stylish-input-group search">
+              <input type="text" class="form-control" name="searchString" placeholder="Type to search by employee name..." [(ngModel)]="searchString">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="table-wrapper mt-30" style="overflow-x:auto;">
+    <div class="table-responsive-lg">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Employee Age</th>
+            <th>Employee Salary</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of EmployeeDetails | searchByName : 'name' : searchString | paginate: { itemsPerPage: 5, currentPage: p }">
+            <td>{{emp.id}}</td>
+            <td>{{emp.employee_name}}</td>
+            <td>{{emp.employee_age}}</td>
+            <td>{{emp.employee_salary}}</td>
+            <td>
+              <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Edit Employee" (click)="editEmployee(emp)">
+                <i class="fas fa-user-edit dashBoardBtnIcon"></i>
+              </button>
+              <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Delete Employee" (click)="deleteEmployee(emp.id)">
+                <i class="fas fa-trash dashBoardBtnIcon"></i>
+              </button>
+            </td>
+          </tr>
+          <br>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="my-container">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+</div>
